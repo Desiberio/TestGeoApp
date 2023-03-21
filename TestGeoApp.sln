@@ -1,0 +1,45 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33424.131
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeoAppUI", "GeoAppUI\GeoAppUI.csproj", "{9738F2C3-F968-4632-A4D5-65371E64541B}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "MarkersDB", "MarkersDB\MarkersDB.sqlproj", "{394E7233-6002-41E5-83EB-4A58E4469E1A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "DataAccess\DataAccess.csproj", "{7AAA2167-4FF9-4FF6-B154-F7FB974EC00E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NMEAParser", "NMEAParser\NMEAParser.csproj", "{EAB3AEED-3721-4943-BE10-E99145ABB909}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9738F2C3-F968-4632-A4D5-65371E64541B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9738F2C3-F968-4632-A4D5-65371E64541B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9738F2C3-F968-4632-A4D5-65371E64541B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9738F2C3-F968-4632-A4D5-65371E64541B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{394E7233-6002-41E5-83EB-4A58E4469E1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{394E7233-6002-41E5-83EB-4A58E4469E1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{394E7233-6002-41E5-83EB-4A58E4469E1A}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{394E7233-6002-41E5-83EB-4A58E4469E1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{394E7233-6002-41E5-83EB-4A58E4469E1A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{394E7233-6002-41E5-83EB-4A58E4469E1A}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{7AAA2167-4FF9-4FF6-B154-F7FB974EC00E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7AAA2167-4FF9-4FF6-B154-F7FB974EC00E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7AAA2167-4FF9-4FF6-B154-F7FB974EC00E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7AAA2167-4FF9-4FF6-B154-F7FB974EC00E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EAB3AEED-3721-4943-BE10-E99145ABB909}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EAB3AEED-3721-4943-BE10-E99145ABB909}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EAB3AEED-3721-4943-BE10-E99145ABB909}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EAB3AEED-3721-4943-BE10-E99145ABB909}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B3F5B67C-2E24-41F5-9F13-AF4A0CB20303}
+	EndGlobalSection
+EndGlobal
