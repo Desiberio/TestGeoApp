@@ -2,7 +2,7 @@
 	@Id int
 AS
 BEGIN
-	select Id, Name, Description, Type, Latitude, Longtitude
+	select Id, Name, Description, Type, Latitude, Longitude
 	from dbo.[Markers]
 	where Id = @Id;
 END

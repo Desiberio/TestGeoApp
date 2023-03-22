@@ -11,11 +11,11 @@ using GMap.NET;
 
 namespace DataAccess
 {
-    public class SqlDataAccess : ISqlDataAccess
+    public class SqlDapperDataAccess
     {
         private readonly string _connectionString;
 
-        public SqlDataAccess(string connectionString)
+        public SqlDapperDataAccess(string connectionString)
         {
             _connectionString = connectionString;
         }
@@ -26,7 +26,7 @@ namespace DataAccess
                 return await connection.QueryAsync<T>(storedProcedure, parameters, commandType: CommandType.StoredProcedure);
         }
 
-        public async Task<IEnumerable<MarkerModel>> LoadData<T>(string storedProcedure)
+        public async Task<IEnumerable<MarkerModel>> LoadMarkers(string storedProcedure)
         {
             using (IDbConnection connection = new SqlConnectionFactory().CreateConnection(_connectionString))
             {

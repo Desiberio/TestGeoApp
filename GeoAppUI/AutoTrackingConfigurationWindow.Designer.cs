@@ -120,10 +120,11 @@
             this.argumentNameLabel.AutoSize = true;
             this.argumentNameLabel.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.argumentNameLabel.Location = new System.Drawing.Point(-1, 53);
+            this.argumentNameLabel.MinimumSize = new System.Drawing.Size(63, 0);
             this.argumentNameLabel.Name = "argumentNameLabel";
-            this.argumentNameLabel.Size = new System.Drawing.Size(62, 13);
+            this.argumentNameLabel.Size = new System.Drawing.Size(63, 13);
             this.argumentNameLabel.TabIndex = 8;
-            this.argumentNameLabel.Text = "Источник:";
+            this.argumentNameLabel.Text = "URL:";
             this.argumentNameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.argumentNameLabel.Visible = false;
             // 

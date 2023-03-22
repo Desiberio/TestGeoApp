@@ -5,5 +5,5 @@
 	[Description] NVARCHAR(100),
 	[Type] INT NOT NULL,
 	[Latitude] DECIMAL(12, 9) NOT NULL,
-	[Longtitude] DECIMAL(12, 9) NOT NULL
+	[Longitude] DECIMAL(12, 9) NOT NULL
 )

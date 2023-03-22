@@ -84,12 +84,12 @@
     <Compile Include="LocationProviders\LocationProviderFromAPI.cs" />
     <Compile Include="LocationProviders\LocationProviderFromGPS.cs" />
     <Compile Include="LocationProviders\ILocationProvider.cs" />
-    <Compile Include="ISqlDataAccess.cs" />
     <Compile Include="LocationProviders\LocationProviderFromFile.cs" />
     <Compile Include="MarkerModel.cs" />
     <Compile Include="MarkersData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SqlDataAccess.cs" />
+    <Compile Include="SqlDapperDataAccess.cs" />
+    <Compile Include="TSQLDataAccess.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

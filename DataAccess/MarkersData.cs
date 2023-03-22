@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,15 +9,17 @@ namespace DataAccess
 {
     public class MarkersData
     {
-        private readonly ISqlDataAccess _db;
-
-        public MarkersData(ISqlDataAccess dataAccess)
-        {
-            _db = dataAccess;
-        }
-
         //delete, add, get single
-        public Task<IEnumerable<MarkerModel>> GetMarkers() => _db.LoadData<MarkerModel>("dbo.spMarkers_GetAll");
-        public Task UpdateMarkerCoordinates(MarkerModel marker) => _db.SaveData("dbo.spMarkers_UpdateCoordinates", new { marker.Id, Latitude = marker.Position.Lat, Longtitude = marker.Position.Lng });
+        public static async Task<IEnumerable<MarkerModel>> GetMarkers(SqlDapperDataAccess db) => await db.LoadMarkers("dbo.spMarkers_GetAll");
+        public static async Task UpdateMarkerCoordinates(MarkerModel marker, SqlDapperDataAccess db) => await db.SaveData("dbo.spMarkers_UpdateCoordinates", new { marker.Id, Latitude = marker.Position.Lat, Longitude = marker.Position.Lng });
+
+        public static async Task<IEnumerable<MarkerModel>> GetMarkers(TSQLDataAccess db) => await db.LoadMarkers("dbo.spMarkers_GetAll");
+        public static async Task UpdateMarkerCoordinates(MarkerModel marker, TSQLDataAccess db) => await db.SaveData("dbo.spMarkers_UpdateCoordinates",
+            new SqlParameter[] 
+            {
+                new SqlParameter("@Id", marker.Id),
+                new SqlParameter("@Latitude", marker.Position.Lat),
+                new SqlParameter("@Longitude", marker.Position.Lng) 
+            });
     }
 }

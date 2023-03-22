@@ -15,19 +15,20 @@ namespace GeoAppUI
 {
     public class GMapInteractionHelper
     {
-        private MarkersData _markersData;
         private GMapControl googleMap;
+        private SqlDapperDataAccess sqlDapperDataAccess;
+        private TSQLDataAccess tsqlDataAccess;
 
         public GMapInteractionHelper(GMapControl googleMap)
         {
-            SqlDataAccess db = new SqlDataAccess("Server=localhost\\SQLEXPRESS;Database=TestGeoAppMarkersDB;Trusted_Connection=True;");
-            _markersData = new MarkersData(db);
+            sqlDapperDataAccess = new SqlDapperDataAccess("Server=localhost\\SQLEXPRESS;Database=TestGeoAppMarkersDB;Trusted_Connection=True;");
+            tsqlDataAccess = new TSQLDataAccess("Server=localhost\\SQLEXPRESS;Database=TestGeoAppMarkersDB;Trusted_Connection=True;");
             this.googleMap = googleMap;
         }
 
         public async void LoadMarkers(GMapControl googleMap)
         {
-            var markers = (List<MarkerModel>) await _markersData.GetMarkers();
+            var markers = (List<MarkerModel>) await MarkersData.GetMarkers(tsqlDataAccess);
             foreach (var marker in markers)
             {
                 GMarkerGoogle gMarker = CreateMarker(marker);
@@ -70,7 +71,7 @@ namespace GeoAppUI
 
         public async void SaveMarkerPostion(MarkerModel marker)
         {
-            await _markersData.UpdateMarkerCoordinates(marker);
+            await MarkersData.UpdateMarkerCoordinates(marker, tsqlDataAccess);
         }
 
         public void ChangeMarkerColor(GMarkerGoogle gMarker)

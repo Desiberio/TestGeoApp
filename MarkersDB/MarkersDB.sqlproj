@@ -74,4 +74,7 @@
   <ItemGroup>
     <None Include="MarkersDB.publish.xml" />
   </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="MarkersDB.refactorlog" />
+  </ItemGroup>
 </Project>
