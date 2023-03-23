@@ -11,7 +11,7 @@ using GMap.NET;
 
 namespace DataAccess
 {
-    public class SqlDapperDataAccess
+    public class SqlDapperDataAccess : ISqlDataAccess
     {
         private readonly string _connectionString;
 
@@ -31,7 +31,7 @@ namespace DataAccess
             using (IDbConnection connection = new SqlConnectionFactory().CreateConnection(_connectionString))
             {
                 var data = await connection.QueryAsync<dynamic>(storedProcedure, commandType: CommandType.StoredProcedure);
-                List<MarkerModel> markers = data.Select(row => new MarkerModel(new GMap.NET.PointLatLng(Convert.ToDouble(row.Latitude), Convert.ToDouble(row.Longtitude)))
+                List<MarkerModel> markers = data.Select(row => new MarkerModel(new GMap.NET.PointLatLng(Convert.ToDouble(row.Latitude), Convert.ToDouble(row.Longitude)))
                     {
                         Id = row.Id,
                         Name = row.Name,
@@ -43,6 +43,12 @@ namespace DataAccess
         }
 
         public async Task SaveData<T>(string storedProcedure, T parameters)
+        {
+            using (IDbConnection connection = new SqlConnection(_connectionString))
+                await connection.ExecuteAsync(storedProcedure, parameters, commandType: CommandType.StoredProcedure);
+        }
+
+        public async Task SaveData(string storedProcedure, object parameters)
         {
             using (IDbConnection connection = new SqlConnection(_connectionString))
                 await connection.ExecuteAsync(storedProcedure, parameters, commandType: CommandType.StoredProcedure);

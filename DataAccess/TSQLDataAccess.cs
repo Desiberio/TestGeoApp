@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace DataAccess
 {
-    public class TSQLDataAccess
+    public class TSQLDataAccess : ISqlDataAccess
     {
         private readonly string _connectionString;
 
@@ -35,7 +35,7 @@ namespace DataAccess
                                 Id = Convert.ToInt32(reader["Id"]),
                                 Name = reader["Name"].ToString(),
                                 Description = reader["Description"].ToString(),
-                                Type = Convert.ToInt32(reader["Type"])                                
+                                Type = Convert.ToInt32(reader["Type"])
                             });
                         }
                     }
@@ -45,13 +45,32 @@ namespace DataAccess
             return markers;
         }
 
-        public async Task SaveData(string storedProcedure, SqlParameter[] parameters)
+        public async Task SaveData(string storedProcedure, object parameters)
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 using (SqlCommand command = new SqlCommand(storedProcedure, connection) { CommandType = CommandType.StoredProcedure })
                 {
-                    command.Parameters.AddRange(parameters);
+                    if (parameters is SqlParameter[] sqlParameters)
+                    {
+                        command.Parameters.Add(sqlParameters);
+                    }
+                    else
+                    {
+                        try
+                        {
+                            dynamic dynamicParameters = (dynamic)parameters;
+
+                            command.Parameters.AddWithValue("@Id", dynamicParameters.Id);
+                            command.Parameters.AddWithValue("@Latitude", dynamicParameters.Latitude);
+                            command.Parameters.AddWithValue("@Longitude", dynamicParameters.Longitude);
+                        }
+                        catch (Exception ex)
+                        {
+                            throw new Exception($"Error while reading parameters has occured: {ex.Message}", ex);
+                        }
+                    }
+
                     connection.Open();
                     await command.ExecuteNonQueryAsync();
                 }

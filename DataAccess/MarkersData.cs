@@ -9,17 +9,14 @@ namespace DataAccess
 {
     public class MarkersData
     {
-        //delete, add, get single
-        public static async Task<IEnumerable<MarkerModel>> GetMarkers(SqlDapperDataAccess db) => await db.LoadMarkers("dbo.spMarkers_GetAll");
-        public static async Task UpdateMarkerCoordinates(MarkerModel marker, SqlDapperDataAccess db) => await db.SaveData("dbo.spMarkers_UpdateCoordinates", new { marker.Id, Latitude = marker.Position.Lat, Longitude = marker.Position.Lng });
+        private readonly ISqlDataAccess _db;
 
-        public static async Task<IEnumerable<MarkerModel>> GetMarkers(TSQLDataAccess db) => await db.LoadMarkers("dbo.spMarkers_GetAll");
-        public static async Task UpdateMarkerCoordinates(MarkerModel marker, TSQLDataAccess db) => await db.SaveData("dbo.spMarkers_UpdateCoordinates",
-            new SqlParameter[] 
-            {
-                new SqlParameter("@Id", marker.Id),
-                new SqlParameter("@Latitude", marker.Position.Lat),
-                new SqlParameter("@Longitude", marker.Position.Lng) 
-            });
+        public MarkersData(ISqlDataAccess db)
+        {
+            _db = db;
+        }
+        //delete, add, get single
+        public async Task<IEnumerable<MarkerModel>> GetMarkers() => await _db.LoadMarkers("dbo.spMarkers_GetAll");
+        public async Task UpdateMarkerCoordinates(MarkerModel marker) => await _db.SaveData("dbo.spMarkers_UpdateCoordinates", new { marker.Id, Latitude = marker.Position.Lat, Longitude = marker.Position.Lng });
     }
 }

@@ -81,6 +81,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ISqlDataAccess.cs" />
     <Compile Include="LocationProviders\LocationProviderFromAPI.cs" />
     <Compile Include="LocationProviders\LocationProviderFromGPS.cs" />
     <Compile Include="LocationProviders\ILocationProvider.cs" />

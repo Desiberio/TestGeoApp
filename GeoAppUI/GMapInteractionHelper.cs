@@ -15,20 +15,19 @@ namespace GeoAppUI
 {
     public class GMapInteractionHelper
     {
-        private GMapControl googleMap;
-        private SqlDapperDataAccess sqlDapperDataAccess;
-        private TSQLDataAccess tsqlDataAccess;
+        private GMapControl _googleMap;
+        private MarkersData _markersData;
 
         public GMapInteractionHelper(GMapControl googleMap)
         {
-            sqlDapperDataAccess = new SqlDapperDataAccess("Server=localhost\\SQLEXPRESS;Database=TestGeoAppMarkersDB;Trusted_Connection=True;");
-            tsqlDataAccess = new TSQLDataAccess("Server=localhost\\SQLEXPRESS;Database=TestGeoAppMarkersDB;Trusted_Connection=True;");
-            this.googleMap = googleMap;
+            //_markersData = new MarkersData(new SqlDapperDataAccess("Server=localhost\\SQLEXPRESS;Database=TestGeoAppMarkersDB;Trusted_Connection=True;"));
+            _markersData = new MarkersData(new TSQLDataAccess("Server=localhost\\SQLEXPRESS;Database=TestGeoAppMarkersDB;Trusted_Connection=True;"));
+            this._googleMap = googleMap;
         }
 
         public async void LoadMarkers(GMapControl googleMap)
         {
-            var markers = (List<MarkerModel>) await MarkersData.GetMarkers(tsqlDataAccess);
+            var markers = (List<MarkerModel>) await _markersData.GetMarkers();
             foreach (var marker in markers)
             {
                 GMarkerGoogle gMarker = CreateMarker(marker);
@@ -71,7 +70,7 @@ namespace GeoAppUI
 
         public async void SaveMarkerPostion(MarkerModel marker)
         {
-            await MarkersData.UpdateMarkerCoordinates(marker, tsqlDataAccess);
+            await _markersData.UpdateMarkerCoordinates(marker);
         }
 
         public void ChangeMarkerColor(GMarkerGoogle gMarker)
@@ -118,7 +117,7 @@ namespace GeoAppUI
         {
             var marker = e.TrackedMarker as GMarkerGoogle;
             if (marker != null && marker.Tag != null)
-                CheckIfInsidePolygon(marker, googleMap.Overlays[0]);
+                CheckIfInsidePolygon(marker, _googleMap.Overlays[0]);
         }
 
         public void CheckIfInsidePolygon(GMapMarker marker, GMapOverlay overlay)
@@ -149,7 +148,7 @@ namespace GeoAppUI
                     ChangeMarkerColor(gMarker);
                     break;
                 case PolygonEnterAction.CreateNewRandomMarkerInViewArea:
-                    googleMap.Overlays.First(x => x.Id == "Test").Markers.Add(CreateMarker(googleMap.ViewArea));
+                    _googleMap.Overlays.First(x => x.Id == "Test").Markers.Add(CreateMarker(_googleMap.ViewArea));
                     break;
             }
         }
